@@ -1,6 +1,6 @@
-# MangoPay2 Ruby SDK
+# Mangopay Ruby SDK
 
-The gem for interacting with the version 2 of the MangoPay API.
+The gem for interacting with the version 2 of the Mangopay API.
 See the [API documentation](http://docs.mangopay.com/api-references/)
 for more details on the API.
 
@@ -10,24 +10,21 @@ Tested on the following versions of Ruby: 1.9.2, 1.9.3, 2.0.0
 
 ### Version 3.*
 ** BREAKING CHANGES **
-This version (3.*) of the gem is targeting the MangoPay API Version 2.
+This version (3.*) of the gem is targeting the Mangopay API Version 2.
 It has a brand new structure to make the api calls easier to use
 and is not backward compatible with 2.* series.
+
+Since [v3.0.17](https://github.com/Mangopay/mangopay2-ruby-sdk/releases/tag/v3.0.17) of the SDK, you must be using at least v2.01 of the API (more information about the changes required [here](https://docs.mangopay.com/api-v2-01-overview/))
 
 ## Usage
 
 ### Install
+* You can get yourself a [free sandbox account](https://www.mangopay.com/get-started/create-sandbox/) or sign up for a [production account](https://www.mangopay.com/get-started/submit-your-app/create-credentials/) (note that validation of your production account can take a few days, so think about doing it in advance of when you actually want to go live).
+
 * Install the gem by either running ```gem install mangopay```
 or by adding it to your Gemfile ```gem 'mangopay'```
 
-* The Rails users will be happy to know that there is a new generator script
-that will help you configure your access to the MangoPay API version 2.
-Simply run ``rails generate mangopay:install CLIENT_ID CLIENT_NAME CLIENT_EMAIL``
-where CLIENT_ID is the id you will use to connect to the api
-and CLIENT_NAME is a full name that will be use to identify all communications
-between you and the MangoPay Team.
-
-* Otherwise, call ```MangoPay.configure``` in your script as shown in the snippet below.
+* Using the credential info from the signup process above, call ```MangoPay.configure``` in your script as shown in the snippet below.
 
 ### Examples
 
@@ -35,7 +32,7 @@ between you and the MangoPay Team.
 require 'mangopay'
 
 
-# configuration (not required if Rails generator fired as above)
+# configuration
 MangoPay.configure do |c|
   c.preproduction = true
   c.client_id = 'YOUR_CLIENT_ID'
@@ -62,7 +59,7 @@ pagination # => {"page"=>1, "per_page"=>8, "total_pages"=>748, "total_items"=>59
 accounts = MangoPay::BankAccount.fetch(john_id) # => [{...}, ...]: list of accounts data hashes (10 per page by default)
 
 
-# errors handling
+# error handling
 begin
   MangoPay::NaturalUser.create({})
 rescue MangoPay::ResponseError => ex
@@ -87,7 +84,7 @@ end
 Make sure that you have run: ```bundle install```
 Then you just have to run rspec ```rspec``` to run all the test suite.
 Feel free to report any test failure by creating an issue
-on the [Gem's Github](https://github.com/MangoPay/mangopay2-ruby-sdk/issues)
+on the [Gem's Github](https://github.com/Mangopay/mangopay2-ruby-sdk/issues)
 
 ## Contributing
 

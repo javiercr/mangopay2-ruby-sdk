@@ -2,8 +2,9 @@ describe MangoPay::BankAccount do
   include_context 'bank_accounts'
   
   def create(params)
-    params_fixed = { OwnerName: 'John', OwnerAddress: 'Here' }.merge(params)
-    MangoPay::BankAccount.create(new_natural_user['Id'], params_fixed)
+    user = new_natural_user
+    params_fixed = { OwnerName: 'John', OwnerAddress: user['Address'] }.merge(params)
+    MangoPay::BankAccount.create(user['Id'], params_fixed)
   end
 
   describe 'CREATE' do
@@ -15,13 +16,13 @@ describe MangoPay::BankAccount do
     it 'creates a new GB bank detail' do
       created = create({
         Type: 'GB',
-        AccountNumber: '18329068',
-        SortCode: '306541',
+        AccountNumber: '63956474',
+        SortCode: '200000',
       })
       expect(created['Id']).not_to be_nil
       expect(created['Type']).to eq('GB')
-      expect(created['AccountNumber']).to eq('18329068')
-      expect(created['SortCode']).to eq('306541')
+      expect(created['AccountNumber']).to eq('63956474')
+      expect(created['SortCode']).to eq('200000')
     end
 
     it 'creates a new US bank detail' do
